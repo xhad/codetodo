@@ -1,0 +1,40 @@
+{
+  "name": "codetodo",
+  "version": "1.0.0",
+  "description": "Code Learn Log",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chad Lynch",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "child_process": "^1.0.2",
+    "gulp-jshint": "^2.0.1",
+    "gulp-load-plugins": "^1.3.0",
+    "gulp-mocha": "^3.0.1",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-shell": "^0.5.2",
+    "gulp-sync": "^0.1.4",
+    "gulp-webpack": "^1.5.0",
+    "jshint": "^2.9.3",
+    "mocha": "^3.0.2",
+    "morgan": "^1.7.0",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
+    "email-verification": "^0.4.5",
+    "express": "^4.14.0",
+    "express-sanitizer": "^1.0.1",
+    "jwt-simple": "^0.5.0",
+    "lodash": "^4.15.0",
+    "moment": "^2.15.0",
+    "mongoose": "^4.6.0",
+    "paths": "^0.1.1",
+    "sanitizer": "^0.1.3"
+  }
+}
