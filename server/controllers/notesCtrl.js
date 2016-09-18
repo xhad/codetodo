@@ -1,7 +1,66 @@
 const Promise = require('bluebird');
+const NoteService = require('../services/NoteService');
+const noteService = new NoteService();
 
-var Notes = function() {};
+var NotesCtrl = function() {};
 
-NotesCtrl.prototype.new = function() {
+NotesCtrl.prototype.saveNote = function(userId, note) {
+  return new Promise((resolve, reject) => {
+    if (userId && note.title && note.body) {
+      if (!note.color)
+        note.color = '#e9e9e9';
+      noteService.create(userId, note)
+        .then((result) => {
+          resolve(result);
+        }).error((err) => {
+          reject(err);
+        })
 
+    } else
+      reject({
+        status: false,
+        message: 'Please include a title and body'
+      })
+  }).catch((err) => {
+    return err;
+  })
+};
+
+NotesCtrl.prototype.getNotes = function(userId) {
+  return new Promise((resolve, reject) => {
+    if (userId) {
+      noteService.read({
+        userId: userId
+      }).then((result) => {
+        resolve(result);
+      }).error((err) => {
+        reject(false);
+      })
+    } else
+      reject({
+        status: false,
+        message: 'No user sent'
+      })
+  })
 }
+
+NotesCtrl.prototype.updateNote = function(userId, note) {
+  return new Promise((resolve, reject) => {
+    if (userId && note._id) {
+      noteService.update(note)
+        .then((result) => {
+          resolve(result);
+        }).error((err) => {
+          reject(err);
+        })
+    } else
+      reject({
+        status: false,
+        message: 'must include userId and note _id'
+      })
+  }).catch((err) => {
+    return err;
+  })
+}
+
+module.exports = NotesCtrl;

@@ -3,34 +3,41 @@ const Promise = require('bluebird');
 
 var NoteService = function() {};
 
-NoteService.prototype.create = function(note) {
+NoteService.prototype.create = function(userId, note) {
   return new Promise((resolve, reject) => {
-    let newNote = new NoteModel({
-      userId: note.userId,
-      category: note.category,
-      tags: note.tags,
-      title: note.title,
-      body: note.body,
-      color: note.color,
-      created: new Date(),
-      archived: false
-    });
 
-    let save = newNote.save();
+    function makeNote() {
+      let newNote = new NoteModel();
+      newNote.userId = userId;
 
-    save.then((result) => {
-      resolve(result);
-    }).error((err) => {
-      reject(err);
-    })
+      for (let key in note) {
+        newNote[key] = note[key];
+      }
+
+      save(newNote);
+    }
+
+    function save(newNote) {
+      newNote.save()
+        .then((result) => {
+          resolve(result);
+        }).error((err) => {
+          reject(err);
+        })
+    }
+
+    makeNote();
+
   }).catch((err) => {
     return err;
   })
 };
 
-NoteService.prototype.retrieve = function(object) {
+NoteService.prototype.read = function(object) {
   return new Promise((resolve, reject) => {
-    NoteModel.find({userId: req.userId})
+    NoteModel.find({
+        userId: object.userId
+      })
       .then((notes) => {
         resolve(notes);
       }).error((err) => {
@@ -41,24 +48,53 @@ NoteService.prototype.retrieve = function(object) {
   })
 };
 
-NoteService.prototype.update = function(object) {
+NoteService.prototype.update = function(note) {
   return new Promise((resolve, reject) => {
-    for (let p in object) {
-      console.log(p);
+    // Model.update({ _id: id }, { $set: { size: 'large' }}
+    function makeSet() {
+      let set = {};
+
+      for (let key in note) {
+        if (key != '_id')
+          set[key] = note[key];
+      }
+
+      update(set)
     }
+
+    function update(set) {
+      NoteModel.update({
+        _id: note._id
+      }, {
+        $set: set
+      }).then((result) => {
+        resolve(result);
+      }).error((err) => {
+        reject(err);
+      })
+    }
+
+    makeSet();
+
+
+
+
   }).catch((err) => {
     return err;
   })
 };
 
-NoteService.prototype.delete = function(id) {
+NoteService.prototype.delete = function(object) {
   return new Promise((resolve, reject) => {
-      NoteModel.remove({_id: id})
-      .then((result) => {
-      resolve(true);
-    }).error((err) => {
-      reject(false);
-    })
+    for (let key in object) {
+      NoteModel.remove({
+        key: object['key']
+      }).then((result) => {
+        resolve(result)
+      }).error((err) => {
+        reject(err);
+      })
+    }
   }).catch((err) => {
     return err;
   })

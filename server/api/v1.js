@@ -28,7 +28,7 @@ router.use(bodyParser.urlencoded({
 
 //>> ROUTES
 router.use('/auth', require('./routes/auth'));
-router.use('/note', require('./routes/note'));
+router.use('/notes', require('./routes/notes'));
 
 
 router.get('*', function(req, res) {
