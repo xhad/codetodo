@@ -24,18 +24,18 @@ router.post('/signup', function(req, res) {
           res.json(result);
         else
           res.json({
-            status: false,
+            status: 400,
             message: result.message
           })
       }).catch((err) => {
         res.json({
-          status: false,
+          status: 400,
           message: err
         })
       })
   } else {
     res.send({
-      status: false,
+      status: 400,
       message: 'Please enter your email and Password.'
     })
   }
@@ -68,7 +68,11 @@ router.post('/signin', function(req, res) {
   }
 })
 
-router.post('/whoami', privateApi, function(req, res) {
+router.post('/', privateApi, function(res, res) {
+  res.send(200);
+})
+
+router.get('/whoami', privateApi, function(req, res) {
   res.json({
     status: true,
     userId: req.userId
@@ -80,6 +84,6 @@ router.get('*', function(req, res) {
   res.status = 404;
   res.json({
     status: false,
-    message: "This endpoint does not have a method"
+    message: "This endpoint is not available"
   })
 });

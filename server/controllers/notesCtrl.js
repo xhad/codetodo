@@ -6,9 +6,8 @@ var NotesCtrl = function() {};
 
 NotesCtrl.prototype.saveNote = function(userId, note) {
   return new Promise((resolve, reject) => {
-    if (userId && note.title && note.body) {
-      if (!note.color)
-        note.color = '#e9e9e9';
+    if (userId && note.title && note.value) {
+      note.completed = false;
       noteService.create(userId, note)
         .then((result) => {
           resolve(result);
@@ -62,5 +61,6 @@ NotesCtrl.prototype.updateNote = function(userId, note) {
     return err;
   })
 }
+
 
 module.exports = NotesCtrl;

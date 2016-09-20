@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NoteCard, NoteCreator } from '../ui';
 import { NoteService } from '../services';
+import { Store } from '../store';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'notes-container',
@@ -18,10 +20,10 @@ import { NoteService } from '../services';
   `],
   template: `
     <div class="row center-xs notes">
-      <div class="col-xs-6 creator">
+      <div class="col-xs-10 col-sm-8 col-md-5 creator">
         <note-creator (createNote)="onCreateNote($event)"></note-creator>
       </div>
-      <div class="notes col-xs-8">
+      <div class="notes col-xs-10">
         <div class="row pull-left">
           <note-card
           class="col-xs-12 col-sm-6 col-md-4"
@@ -36,36 +38,29 @@ import { NoteService } from '../services';
   `
 })
 
-export class Notes {
-  notes = [
-    {
-      title: 'Change the World',
-    value: 'Open laptop and commence changing world.',
-    color: '#B3E5FC'
-  },
-  {
-    title: 'Buy wife gift',
-    value: 'Perhaps something that is realated to "coding"',
-    color: '#80D8FF'
-  },
-    {
-      title: 'Study Math',
-      value: 'Start with that Physics MOOK, then maybe a touch of Linear Algebra.',
-      color: '#B2EBF2'}
-  ]
+export class Notes implements OnDestroy {
+  notes = [];
 
-  constructor(private noteService: NoteService) {
+  ngOnDestroy() {
+    console.log('destroyed');
+  }
+  constructor(private noteService: NoteService, private store: Store) {
+
+    this.store.changes.pluck('notes')
+    .subscribe((notes: any) => this.notes = notes);
+
     this.noteService.getNotes()
-    .subscribe(res => this.notes = res.data);
+    .subscribe();
   }
 
-  onNoteChecked(note, i) {
-    this.notes.splice(i, 1);
+  onNoteChecked(note) {
+    this.noteService.completeNote(note)
+    .subscribe()
   }
 
   onCreateNote(note) {
     this.noteService.createNote(note)
-    .subscribe(note => this.notes.push(note));
+    .subscribe();
   }
 
 

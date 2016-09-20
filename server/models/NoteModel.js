@@ -10,10 +10,11 @@ var NoteSchema = new Schema({
   category: String,
   tags: String,
   title: String,
-  body: String,
+  value: String,
   color: String,
   created: Date,
-  archived: Boolean
+  updated: Date,
+  completed: Boolean
 });
 
 module.exports = mongoose.model('Note', NoteSchema, 'notes');

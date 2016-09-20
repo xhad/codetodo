@@ -36,7 +36,8 @@ NoteService.prototype.create = function(userId, note) {
 NoteService.prototype.read = function(object) {
   return new Promise((resolve, reject) => {
     NoteModel.find({
-        userId: object.userId
+        userId: object.userId,
+        completed: false
       })
       .then((notes) => {
         resolve(notes);

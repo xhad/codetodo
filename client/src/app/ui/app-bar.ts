@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-bar',
+  directives: [...ROUTER_DIRECTIVES],
   styles: [`
     @import 'https://fonts.googleapis.com/css?family=Exo|Montserrat|Source+Code+Pro';
     .app-bar {
@@ -27,18 +30,24 @@ import { Component } from '@angular/core';
     `],
   template: `
     <header class="app-bar row middle-xs">
-      <span class="logo col-xs-7">
+      <span [routerLink]="['']" class="logo col-xs-7">
         CodeTodo.(xyz)
       </span>
-      <!--<nav class="col-xs-3">
+      <nav class="col-xs-3">
         <div class="row middle-xs between-xs">
-          <span class="link">Settings</span>
-          <span class="link">Signout</span>
+          <span [routerLink]="['', 'about']" class="link">About</span>
+          <span (click)="signout()" class="link">Signout</span>
         </div>
-      </nav> -->
+      </nav>
       </header>
 
   `
 })
 
-export class AppBar {}
+export class AppBar {
+  constructor(private authService: AuthService) {}
+
+  signout() {
+    this.authService.signout();
+  }
+}

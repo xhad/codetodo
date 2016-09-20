@@ -13,7 +13,7 @@ router.get('/test', function(req, res) {
   })
 });
 
-router.post('/new', privateApi, function(req, res) {
+router.post('/create', privateApi, function(req, res) {
   notesCtrl.saveNote(req.userId, req.body)
   .then((result) => {
     res.json({
@@ -22,14 +22,14 @@ router.post('/new', privateApi, function(req, res) {
     })
   })
 })
-router.get('/get', privateApi, function(req, res) {
-  console.log(req.userId);
+
+//returns all notes for userId
+router.get('/', privateApi, function(req, res) {
   notesCtrl.getNotes(req.userId)
   .then((result) => {
-    console.log(result);
     res.json({
       status: 200,
-      note: result
+      data: result
     })
   }).catch((err) => {
     res.json({
@@ -38,3 +38,5 @@ router.get('/get', privateApi, function(req, res) {
     })
   })
 });
+
+router.post('/complete')

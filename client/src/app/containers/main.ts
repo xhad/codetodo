@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { AppBar } from '../ui/app-bar';
 import { Notes } from './notes';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
 	selector: 'main-container',
 	directives: [
 		AppBar,
-		Notes
+		Notes,
+		...ROUTER_DIRECTIVES
 	],
 	styles: [`
 		@import 'https://fonts.googleapis.com/css?family=Exo';
@@ -18,7 +20,7 @@ import { Notes } from './notes';
 		<div>
 			<app-bar></app-bar>
 			<main class="main">
-				<notes-container></notes-container>
+				<router-outlet></router-outlet>
 			</main>
 		</div>
 	`

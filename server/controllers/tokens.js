@@ -7,7 +7,7 @@ const userService = new UserService();
 module.exports = {
   //use this as middleware for routes that need to be authenticated
   decode: function(req, res, next) {
-    var token = req.headers['x-access-token'];
+    var token = req.headers['authorization'];
     if (!token) {
       // send 401 if a token is not provided
       res.send(401).json({

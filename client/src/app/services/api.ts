@@ -6,13 +6,17 @@ import 'rxjs/add/observable/throw'
 
 @Injectable()
 export class ApiService {
+
+  constructor(private http: Http) {}
+
   headers: Headers = new Headers({
     'Content-Type': 'application/json',
-    Accept: 'application/json'
+    Accept: 'application/json',
+
   });
 
-  api_url: string = 'https://www.codetodo.xyz/api/v1';
-  constructor(private http: Http) {}
+  api_url: string = 'https://codetodo.xyz/api/v1';
+
 
   private getJson(response: Response) {
     return response.json();
@@ -30,7 +34,7 @@ export class ApiService {
 
   }
 
-  get(path: string) {
+  get(path: string): Observable<any> {
     return this.http.get(`${this.api_url}${path}`, { headers: this.headers})
     .map(this.checkForError)
     .catch(err => Observable.throw(err))
@@ -48,10 +52,17 @@ export class ApiService {
     .map(this.getJson);
   }
 
-  delete(path: string, body): Observable<any> {
-    return this.http.delete(`${this.api_url}${path}`, { headers: this.headers})
+  delete(path: string): Observable<any> {
+    return this.http.delete(
+      `${this.api_url}${path}`,
+      { headers: this.headers}
+    )
     .map(this.checkForError)
     .catch(err => Observable.throw(err))
     .map(this.getJson);
+  }
+
+  setHeaders(headers) {
+    Object.keys(headers).forEach(header => this.headers.set(header, headers[header]))
   }
 }
