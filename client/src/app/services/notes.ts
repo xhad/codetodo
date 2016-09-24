@@ -24,8 +24,8 @@ export class NoteService {
 
   completeNote(note) {
     let path = '/notes/complete';
-    return this.apiService.delete(`${path}/${note._id}`)
-    .do(res => this.storeHelper.findAndDelete('notes', res._id))
+    return this.apiService.post(path, note)
+    .do(res => this.storeHelper.findAndDelete('notes', note._id))
 
   }
 }

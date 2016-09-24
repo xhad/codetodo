@@ -21,7 +21,7 @@ import {
   font-weight: bold;
   text-align: left;
   margin-bottom: 10px;
-  border-bottom: 1px solid #090909;
+  border-bottom: 1px dashed #090909;
   color: rgba(0,0,0,0.8);
 }
 .value {
@@ -43,6 +43,10 @@ import {
   border-radius: 100%;
   cursor: pointer;
 }
+.footer {
+  margin-top: 10px;
+  font-size: 90%;
+}
     `
   ],
   template:`
@@ -60,6 +64,9 @@ import {
       </div>
       <div class="col-xs-12 value">
         {{note.value}}
+      </div>
+      <div class="col-xs-12 footer">
+        {{note.created | date:'fullDate' | uppercase}}
       </div>
     </div>
   `

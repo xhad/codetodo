@@ -10,7 +10,8 @@ export class StoreHelper {
   add(prop, state) {
     const currentState = this.store.getState();
     const collection = currentState[prop];
-    this.store.setState(Object.assign({}, currentState, { [prop]: [state, ...collection] }));
+    this.store.setState(Object.assign({}, currentState, { [prop]: [state.data, ...collection] }));
+
   }
   findAndUpdate(prop, state) {
     const currentState = this.store.getState();
@@ -23,8 +24,9 @@ export class StoreHelper {
     })}))
   }
   findAndDelete(prop, id) {
+    console.log(id);
     const currentState = this.store.getState();
     const collection = currentState[prop];
-    this.store.setState(Object.assign({}, currentState, {[prop]: collection.filter(item => item.id !== id)}));
+    this.store.setState(Object.assign({}, currentState, {[prop]: collection.filter(item => item._id != id)}));
   }
 }

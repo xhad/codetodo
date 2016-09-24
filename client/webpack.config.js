@@ -43,7 +43,7 @@ var config = {
     global: true,
     process: true,
     Buffer: false,
-    crypto: 'empty',
+    crypto: true,
     module: false,
     clearImmediate: false,
     setImmediate: false,

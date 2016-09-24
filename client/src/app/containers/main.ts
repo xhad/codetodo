@@ -10,12 +10,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 		Notes,
 		...ROUTER_DIRECTIVES
 	],
-	styles: [`
-		@import 'https://fonts.googleapis.com/css?family=Exo';
-		.main {
-			font-family: 'Exo';
-		}
-		`],
+	styles: [``],
 	template: `
 		<div>
 			<app-bar></app-bar>

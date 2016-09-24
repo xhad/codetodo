@@ -9,6 +9,7 @@ NoteService.prototype.create = function(userId, note) {
     function makeNote() {
       let newNote = new NoteModel();
       newNote.userId = userId;
+      newNote.created = new Date();
 
       for (let key in note) {
         newNote[key] = note[key];

@@ -3,7 +3,10 @@ const safe = require('sanitizer');
 const moment = require('moment');
 const UserService = require("../services/UserService");
 const userService = new UserService();
+const NotesCtrl = require('./notesCtrl');
+const notesCtrl = new NotesCtrl();
 const Token = require('./tokens');
+const starterNote = require('../util/starterNote');
 
 //Users class constructor function
 var UsersCtrl = function() {};
@@ -28,13 +31,14 @@ UsersCtrl.prototype.signUp = function(email, password) {
           });
         else
           userService.new(e, p).then((user) => {
-            if (user.email)
+            if (user.email) {
+              notesCtrl.saveNote(user.userId, starterNote);
               resolve({
                 status: true,
                 userId: user.userId,
                 token: makeToken(user.userId)
               });
-            else
+           } else
               reject({
                 status: false,
                 message: 'An error occoured creating new user.'

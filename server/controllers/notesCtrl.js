@@ -43,6 +43,26 @@ NotesCtrl.prototype.getNotes = function(userId) {
   })
 }
 
+NotesCtrl.prototype.completeNote = function(userId, note) {
+  return new Promise((resolve, reject) => {
+    if (userId && note._id) {
+      note.completed = true;
+      noteService.update(note)
+        .then((result) => {
+          resolve(result);
+        }).error((err) => {
+          reject(err);
+        })
+    } else 
+      reject({
+        status: false,
+        message: 'unable to complete the note'
+      })
+  }).catch((err) => {
+    return err;
+  })
+}
+
 NotesCtrl.prototype.updateNote = function(userId, note) {
   return new Promise((resolve, reject) => {
     if (userId && note._id) {

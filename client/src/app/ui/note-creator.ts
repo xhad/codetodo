@@ -4,23 +4,38 @@ import {
   EventEmitter
 } from '@angular/core';
 import { ColorPicker } from './color-picker';
+import { Autosize } from '../directives/autosize'
 
 @Component({
   selector: 'note-creator',
-  directives: [ColorPicker],
+  directives: [ColorPicker, Autosize],
   styles: [`
   .note-creator {
+    margin-left: -15px;
+    margin-top: 10px;
       padding: 20px;
       background-color: white;
       border-radius: 3px;
     }
     .title {
+      background: transparent;
       font-weight: bold;
       color: rgba(0,0,0,0.8);
     }
     .full {
       height: 100px;
     }
+  .textarea {
+    background: transparent;
+    width: 100%;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    width: 100%;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
   `],
   template: `
   <div
@@ -36,15 +51,16 @@ import { ColorPicker } from './color-picker';
         class="col-xs-10 title"
         *ngIf="fullForm"
       >
-      <input
-        type="text"
+      <textarea
+      autosize
+        class="textarea"
         (focus)="toggle(true)"
         [(ngModel)]="newNote.value"
         name="newNoteValue"
         placeholder="description of code todo..."
-        class="col-xs-10"
 
-      >
+
+      ></textarea>
       <div class="actions col-xs-12 row between-xs"
       *ngIf="fullForm"
       >
@@ -70,12 +86,14 @@ export class NoteCreator {
   @Output() createNote = new EventEmitter();
 
   colors: Array<string> = [
-    '#B3E5FC',
-    '#B2EBF2',
-    '#B2DFDB',
-    '#C8E6C9',
-    '#DCEDC8',
-    '#F0F4C3'
+    '#EF9A9A',
+    '#B39DDB',
+    '#81D4FA',
+    '#A5D6A7',
+    '#FFF59D',
+    '#FFAB91',
+    '#B0BEC5',
+    '#BCAAA4'
   ];
 
   newNote = {

@@ -8,18 +8,21 @@ import { AuthService } from '../services/auth';
   styles: [`
     @import 'https://fonts.googleapis.com/css?family=Exo|Montserrat|Source+Code+Pro';
     .app-bar {
+      position: relative;
+      margin-top: 0;
       height: 65px;
-      padding: 5px 30px;
+      padding: 30px;
       background-color: #FFC107;
       font-family: 'Source Code Pro', monospace;
       font-color: #001;
-
+      margin-bottom: 5px;
+      z-index: 2;
     }
     .logo {
       color: #212121;
       font-size: 20px;
       font-weight: bold;
-      cursor: pointer;
+
     }
     .link {
       color: #212121;
@@ -27,19 +30,21 @@ import { AuthService } from '../services/auth';
       font-weight: 400;
       cursor: pointer;
     }
+
     `],
   template: `
-    <header class="app-bar row middle-xs">
-      <span [routerLink]="['']" class="logo col-xs-7">
+    <header class="app-bar row middle-xs shadow-2">
+      <span [routerLink]="['']" class="logo col-xs-8">
         CodeTodo.(xyz)
       </span>
-      <nav class="col-xs-3">
-        <div class="row middle-xs between-xs">
-          <span [routerLink]="['', 'about']" class="link">About</span>
-          <span (click)="signout()" class="link">Signout</span>
-        </div>
+      <nav class="col-xs-2 ">
+
+          <!--<span [routerLink]="['', 'about']" class="link">About</span>-->
+          <span (click)="signout()" class="btn link">Signout</span>
+
       </nav>
       </header>
+
 
   `
 })

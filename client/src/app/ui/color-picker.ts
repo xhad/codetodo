@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     position: relative;
   }
   .selector {
-    min-width: 120px;
+    min-width: 220px;
     border: 1px solid lightgrey;
     padding: 10px;
     background-color: #efefef;

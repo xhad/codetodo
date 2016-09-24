@@ -14,6 +14,7 @@ router.get('/test', function(req, res) {
 });
 
 router.post('/create', privateApi, function(req, res) {
+  console.log(req.userId)
   notesCtrl.saveNote(req.userId, req.body)
   .then((result) => {
     res.json({
@@ -39,4 +40,12 @@ router.get('/', privateApi, function(req, res) {
   })
 });
 
-router.post('/complete')
+router.post('/complete', privateApi, function(req, res) {
+  notesCtrl.completeNote(req.body.userId, req.body)
+    .then((result) => {
+      res.json({
+        status: 200,
+        message: 'note completed'
+      })
+    })
+})

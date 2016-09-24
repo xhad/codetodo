@@ -10,7 +10,13 @@ import { Router } from '@angular/router';
           height: 100%;
         }
         input {
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #eeeeee;
           border-bottom: 1px solid lightgrey;
+          height: 55px;
+          font-size: 15px;
+          background-color: white;
         }
         .ng-invalid.ng-dirty {
           border-bottom: 1px solid red;
@@ -18,9 +24,13 @@ import { Router } from '@angular/router';
         form {
           width: 100%;
           border-radius: 2px;
-          background-color: white;
-          padding: 20px;
+          background-color: #F5F5F5;
+          padding: 10px;
           height: 400px;
+        }
+
+        h3 {
+          text-transform: capitalize;
         }
         .inputs {
           height: 100%;
@@ -28,6 +38,10 @@ import { Router } from '@angular/router';
         }
         .link {
           color: #FFC107;
+          padding: 5px;
+          margin-left: 20px;
+          border: 2px solid #FFC107;
+          cursor: pointer;
         }
         .link:hover {/#/auth
         .title {
@@ -43,6 +57,7 @@ import { Router } from '@angular/router';
           right: 20px;
 
         }
+
     `],
     template: `
       <div class="auth row center-xs middle-xs">
@@ -53,7 +68,7 @@ import { Router } from '@angular/router';
           >
             <div class="inputs row center-xs middle-xs">
               <h3 class="col-xs-9 title">
-              {{ mode }}
+              {{ titleText }}
               </h3>
               <input
                 class="col-xs-9"
@@ -84,10 +99,10 @@ import { Router } from '@angular/router';
                   <button
                   [disabled]="!authForm.form.valid"
                   type="submit"
-                  class="btn-light">
+                  class="col-xs-5 btn-light submit-button">
                   {{ mode }}
                   </button>
-                  <a (click)="changeMode()" class="btn-light link">
+                  <a (click)="changeMode()" class="col-xs-5 link">
                   {{ linkText }}
                   </a>
                </div>
@@ -106,16 +121,18 @@ export class Auth {
 
   mode: string = 'signin';
   linkText: string = 'Don\'t have  an account?';
-
+  titleText: string = 'Sign In';
   constructor(private router: Router, private authService: AuthService) {}
 
   changeMode() {
     if (this.mode === 'signin') {
       this.mode = 'signup'
       this.linkText = 'Already have an account?';
+      this.titleText = 'Create a new Account';
     } else {
       this.mode = 'signin';
       this.linkText = 'Don\'t have an account?';
+      this.titleText = 'Sign In'
     }
   }
 

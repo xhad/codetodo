@@ -12,15 +12,15 @@ import 'rxjs/Rx';
   ],
   styles:[`
     .notes {
-      padding-top: 50px;
+      padding-top: 30px;
     }
     .creator {
-      margin-bottom: 40px;
+      margin-bottom: 10px;
     }
   `],
   template: `
     <div class="row center-xs notes">
-      <div class="col-xs-10 col-sm-8 col-md-5 creator">
+      <div class="col-xs-10 col-sm-8 col-md-9 creator">
         <note-creator (createNote)="onCreateNote($event)"></note-creator>
       </div>
       <div class="notes col-xs-10">

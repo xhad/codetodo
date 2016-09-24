@@ -1,21 +1,27 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
+@import 'https://fonts.googleapis.com/css?family=Exo|Montserrat|Source+Code+Pro';
 
 * {
   box-sizing: border-box;
 }
 
-body, html, main, .main, .app, app {
+html {
+overflow-x: hidden;
+
+}
+body, main, .main, .app, app {
   min-height: 100%;
   height: 100%;
-  background-color: #efefef;
+  background-color: #CFD8DC;
+  z-index: -1;
+        font-family: 'Source Code Pro', monospace;
+
+
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-}
 
 .btn-light {
-  border: none;
+  border: 1px solid black;
   outline: none;
   border-radius: 2px;
   min-width: 60px;
@@ -29,7 +35,7 @@ body {
 }
 
 .btn-light:hover {
-  background-color: rgba(0,0,0, 0.2);
+  background-color: rgba(0,34,0, 0.2);
 }
 
 .btn-light:disabled, .btn-light[disabled], .btn-light.disabled {

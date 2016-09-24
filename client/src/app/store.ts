@@ -7,19 +7,19 @@ export interface Note {
   title: string,
   value: string,
   _id?: string | number,
-  createAt?: string,
-  updatedAt?: string,
+  created?: string,
+  updated?: string,
   userId?: string
 }
 
 export interface State {
   notes: Array<Note>,
-  user: Object;
+  user: Object,
 }
 
 const defaultState: State = {
   notes: [],
-  user: {}
+  user: {},
 };
 
 const _store = new BehaviorSubject<State>(defaultState);

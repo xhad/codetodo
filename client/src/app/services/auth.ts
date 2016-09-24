@@ -34,6 +34,7 @@ export class AuthService implements CanActivate {
 
   authenticate(path, creds) {
     return this.apiService.post(`/auth/${path}`, creds)
+    .do(res => res.userId = this.userId)
     .do(res => this.setJwt(res.token))
     .do(res => this.storeHelper.update('userId', res.userId))
     .map(res => res.data);
