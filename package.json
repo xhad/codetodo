@@ -27,7 +27,7 @@
     "angular2-autosize": "^1.0.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
-    "ejs": "^2.5.2",
+    "ejs": "^3.1.6",
     "email-verification": "^0.4.5",
     "express": "^4.14.0",
     "express-sanitizer": "^1.0.1",
